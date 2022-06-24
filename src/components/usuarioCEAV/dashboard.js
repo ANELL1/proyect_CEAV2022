@@ -111,26 +111,26 @@ class Dashboard extends Component{
             },      
           }        
           } 
-          const columns = ["NO. EMPLEADO","NOMBRE","APELLIDOS","UNIDAD ADMINISTRATIVA","PUESTO","CORREO","EXT."];  
+          const columns = ["NO. EMPLEADO","NOMBRE","APELLIDOS","CORREO","EXT.","PUESTO","UNIDAD ADMINISTRATIVA"];  
 
-              data1 = this.state.tablaEmpledos.map((rows)=>{ 
-                console.log("esto es rows",rows)
-                    return([rows.numEmpleado,rows.nombre,rows.apellidos,rows.nombreArea,rows.puesto,rows.correo,rows.ext])
+              data1 = this.state.tablaEmpledos.map((rows)=>{                
+                    return([rows.numEmpleado,rows.nombre,rows.apellidos,rows.correo,rows.ext,rows.puesto,rows.nombreArea,])
   
                   })           
 
      tablaInicio = 
-          <div>
-            <Card  style={{marginTop:"1%",width:"95%", marginLeft:"2%"}}>  
-            <MUIDataTable    
+     <center>
+          <div style={{ width:'95%'}}>            
+            <Card  style={{marginTop:"1%",width:"90%"}}>  
+            <MUIDataTable                
             title={"DIRECTORIO CEAV" }
             data={data1}
             columns={columns}
             options={options}
             />
-            </Card> 
+            </Card>             
             </div> 
-
+            </center>
            
 
         return(

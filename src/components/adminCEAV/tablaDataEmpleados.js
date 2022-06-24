@@ -696,7 +696,7 @@ class tablaDataEmpleado extends Component{
          })
          let tablaInicio = 
          <div>
-           <Card  style={{marginTop:"1%",width:"100%" }}>  
+           <Card  style={{marginTop:"1%",width:"95%" }}>  
            <MUIDataTable    
            title={"DIRECTORIO CEAV" }
            data={data1}
