@@ -21,6 +21,7 @@ import { MenuUnfoldOutlined,MenuFoldOutlined ,SolutionOutlined,IdcardOutlined,Ba
 import './sideNavAdmin.css'
 import imagenCEAV from '../imagen/CEAVlogo.png'
 import tablaDataEmpleado from './tablaDataEmpleados';
+import FechaNotificaciones  from './fechaNotificaciones'
 
 class sideNavAdmin extends Component{
     constructor(props){
@@ -35,13 +36,15 @@ class sideNavAdmin extends Component{
             sideNavEmpleados:false,
             sideNavChangePass:false,
             sideNavTablaDirectorio:true,
+            sideFechasNotificaciones:false,
             collapsed:false, 
             tablaArea:[],
             tablaOficina:[],
             tablaPersonal:[],
             tablaPuesto:[],
             tablaEmpleados:[],
-            tablaDataEmpleados:[]
+            tablaDataEmpleados:[],
+            // fechaNotificaciones:[]
            
         }
     }
@@ -61,6 +64,7 @@ class sideNavAdmin extends Component{
         this.setState({sideNavRoles:false})
         this.setState({sideNavEmpleados:false})  
         this.setState({sideNavChangePass:false})
+        this.setState({sideFechasNotificaciones:false})
 
       }       
       sideNavArea(){
@@ -72,6 +76,7 @@ class sideNavAdmin extends Component{
         this.setState({sideNavRoles:false})
         this.setState({sideNavEmpleados:false})  
         this.setState({sideNavChangePass:false}) 
+        this.setState({sideFechasNotificaciones:false})
       }
       sideNavOficinas(){
         this.setState({sideNavTablaDirectorio:false})
@@ -81,7 +86,8 @@ class sideNavAdmin extends Component{
         this.setState({sideNavPuesto:false})
         this.setState({sideNavRoles:false})
         this.setState({sideNavEmpleados:false})  
-        this.setState({sideNavChangePass:false}) 
+        this.setState({sideNavChangePass:false})
+        this.setState({sideFechasNotificaciones:false}) 
       }
       sideNavPersonal(){
         this.setState({sideNavTablaDirectorio:false})
@@ -91,7 +97,8 @@ class sideNavAdmin extends Component{
         this.setState({sideNavPuesto:false})
         this.setState({sideNavRoles:false})
         this.setState({sideNavEmpleados:false})  
-        this.setState({sideNavChangePass:false})       
+        this.setState({sideNavChangePass:false}) 
+        this.setState({sideFechasNotificaciones:false})      
       }
       sideNavPuesto(){
         this.setState({sideNavTablaDirectorio:false})
@@ -101,7 +108,8 @@ class sideNavAdmin extends Component{
         this.setState({sideNavPuesto:true})
         this.setState({sideNavRoles:false})
         this.setState({sideNavEmpleados:false})  
-        this.setState({sideNavChangePass:false})   
+        this.setState({sideNavChangePass:false}) 
+        this.setState({sideFechasNotificaciones:false})  
       }
       sideNavRoles(){
         this.setState({sideNavTablaDirectorio:false})
@@ -111,7 +119,8 @@ class sideNavAdmin extends Component{
         this.setState({sideNavPuesto:false})
         this.setState({sideNavRoles:true})
         this.setState({sideNavEmpleados:false})  
-        this.setState({sideNavChangePass:false})     
+        this.setState({sideNavChangePass:false}) 
+        this.setState({sideFechasNotificaciones:false})    
       }
       sideNavEmpleados(){
         this.setState({sideNavTablaDirectorio:false})
@@ -121,7 +130,8 @@ class sideNavAdmin extends Component{
         this.setState({sideNavPuesto:false})
         this.setState({sideNavRoles:false})
         this.setState({sideNavEmpleados:true})  
-        this.setState({sideNavChangePass:false})   
+        this.setState({sideNavChangePass:false}) 
+        this.setState({sideFechasNotificaciones:false})  
       }
       sideNavChangePass(){
         this.setState({sideNavTablaDirectorio:false})
@@ -132,6 +142,18 @@ class sideNavAdmin extends Component{
         this.setState({sideNavRoles:false})
         this.setState({sideNavEmpleados:false})  
         this.setState({sideNavChangePass:true})
+        this.setState({sideFechasNotificaciones:false})
+      } 
+      sideFechasNotificaciones(){
+        this.setState({sideNavTablaDirectorio:false})
+        this.setState({sideNavArea:false})
+        this.setState({sideNavOficinas:false})
+        this.setState({sideNavPersonal:false})
+        this.setState({sideNavPuesto:false})
+        this.setState({sideNavRoles:false})
+        this.setState({sideNavEmpleados:false})  
+        this.setState({sideNavChangePass:false})
+        this.setState({sideFechasNotificaciones:true})
       }
 
 
@@ -148,7 +170,8 @@ class sideNavAdmin extends Component{
         let tablaRoles;
         let tablaEmpleados;
         let tablaChangePass;
-        let tablaDataEmpleado
+        let tablaDataEmpleado;
+        let tablaFechaNotificaciones
 
          if(this.state.sideNavArea ===true){
             tablaArea= 
@@ -198,38 +221,46 @@ class sideNavAdmin extends Component{
            <div>
              <TablaDirectorio/>
            </div>
-         }
+         } 
+         if(this.state.sideFechasNotificaciones === true)
+         tablaFechaNotificaciones = 
+         <div>
+          <tablaFechaNotificaciones/>
+         </div>
  
 
         let menu=
         <div>
         <Menu theme="light" mode="inline" className='ant-menu1' defaultSelectedKeys={['1']}>       
         <Menu.Item key="1" onClick={e=>this.sideNavArea()} icon={<MDBIcon icon="chalkboard-teacher" style={{ fontSize: '20px', color:'#000' }}/>}>           
-            Area              
+          ÁREAS              
         </Menu.Item>
         <Menu.Item key="2"  onClick={e=>this.sideNavOficinas()} icon={<MDBIcon far icon="building" style={{ fontSize: '20px', color: '#000' }}/>} >           
-          Oficinas              
+          OFICINAS              
         </Menu.Item>
         <Menu.Item key="3"  onClick={e=>this.sideNavPersonal()} icon={<MDBIcon icon="users-cog" style={{ fontSize: '20px', color: '#000' }} />}>           
-            Personal              
+          PERSONAL              
         </Menu.Item>
         <Menu.Item key="4"  onClick={e=>this.sideNavPuesto()}  icon={<IdcardOutlined  style={{ fontSize: '25px', color: '#000' }} />}>           
-            Puesto              
+          PUESTOS              
         </Menu.Item>
         <Menu.Item key="5" onClick={e=>this.sideNavRoles()}  icon={<UsergroupAddOutlined style={{ fontSize: '25px', color: '#000' }} />}>           
-            Roles              
+         ROLES              
         </Menu.Item>
         <Menu.Item key="6"  onClick={e=>this.sideNavEmpleados()} icon={<SolutionOutlined style={{ fontSize: '25px', color: '#000' }} />}>           
-         Usuarios              
+         USUARIOS              
         </Menu.Item>
-        <Menu.Item key="7"  onClick={e=>this.sideNavChangePass()} icon={<MDBIcon icon="key"  style={{ fontSize: '20px', color: '#000' }} />}>           
+        {/* <Menu.Item key="7"  onClick={e=>this.sideNavChangePass()} icon={<MDBIcon icon="key"  style={{ fontSize: '20px', color: '#000' }} />}>           
          restablecer contraseña              
-        </Menu.Item>
+        </Menu.Item> */}
         <Menu.Item key="8"  onClick={e=>this.sideNavTablaDirectorio()} icon={<MDBIcon icon="pencil-alt" style={{ fontSize: '20px', color: '#000' }} />}>           
-         Edita Directorio              
+         EDITA USUARIO              
         </Menu.Item>
-        <Menu.Item key="9" onClick={e=>this.cerrar()} icon={<MDBIcon icon="door-open" style={{ fontSize: '20px', color: '#000' }} />}>           
-          Cerrar Sesión            
+        <Menu.Item key="9"  onClick={e=>this.sideFechasNotificaciones()} icon={<MDBIcon icon="user-clock"  style={{ fontSize: '20px', color: '#000' }} />}>           
+         NOTIFICACIÓN ALTA Y BAJAS              
+        </Menu.Item>
+        <Menu.Item key="10" onClick={e=>this.cerrar()} icon={<MDBIcon icon="door-open" style={{ fontSize: '20px', color: '#000' }} />}>           
+          CERRAR SESIÓN            
         </Menu.Item>
         </Menu>
         </div>
@@ -260,6 +291,7 @@ class sideNavAdmin extends Component{
                         {tablaEmpleados}
                         {tablaChangePass}
                         {tablaDataEmpleado}
+                        {tablaFechaNotificaciones}
                 </Layout>
                 </Layout>
                 <Footer  className="piePag">

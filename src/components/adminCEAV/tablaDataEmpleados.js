@@ -299,7 +299,7 @@ class tablaDataEmpleado extends Component{
       let telefono = this.state.telefonoUpdate
       let ext = this.state.extUpdate 
       let statusEmpleado = this.state.statusEmpleadoUpdate
-      let departamento = this.state.departamentoUpdate.toUpperCase()
+      let departamento = this.state.departamentoUpdate
       let fk_oficinas = this.state.id_oficinaUpdate
       let fk_area = this.state.id_areaUpdate
       let fk_puesto = this.state.id_puestoUpdate
@@ -307,10 +307,10 @@ class tablaDataEmpleado extends Component{
       let fk_nivel = this.state.fk_nivelUpdate
       // id_empleado,nombre,apellidos,curp,rfc,correo,numEmpleado,telefono,ext,statusEmpleado,departamento,
       // fk_oficinas,fk_area,fk_puesto,fk_nivel,fk_personal
- console.log("id_empleado",id_empleado,"nombre",nombre,"apellidos",apellidos,"curp",curp)
- console.log("rfc",rfc,"correo",correo,"numEmpleado",numEmpleado,"telefono",telefono)
- console.log("ext",ext,"statusEmpleado",statusEmpleado,"departamento",departamento,"fk_oficinas",fk_oficinas)
- console.log("fk_area",fk_area,"fk_puesto",fk_puesto,"fk_personal",fk_personal,"fk_nivel",fk_nivel)
+//  console.log("id_empleado",id_empleado,"nombre",nombre,"apellidos",apellidos,"curp",curp)
+//  console.log("rfc",rfc,"correo",correo,"numEmpleado",numEmpleado,"telefono",telefono)
+//  console.log("ext",ext,"statusEmpleado",statusEmpleado,"departamento",departamento,"fk_oficinas",fk_oficinas)
+//  console.log("fk_area",fk_area,"fk_puesto",fk_puesto,"fk_personal",fk_personal,"fk_nivel",fk_nivel)
       if( nombre && apellidos  &&  correo && numEmpleado && telefono  && statusEmpleado ){  
           axios({
          url: API,
@@ -333,9 +333,9 @@ class tablaDataEmpleado extends Component{
              icon:"success",
              button:true
            }); 
-          //  setTimeout(function(){
-          //    window.location.href='/sideNavAdmin'
-          //     }, 1500); 
+           setTimeout(function(){
+             window.location.reload()
+              }, 1500); 
          }else{
           swal({
              title:"Notificación del sistema",
@@ -538,13 +538,13 @@ class tablaDataEmpleado extends Component{
                               />
             </Col>
             <Col xs="6">       
-            <label htmlFor="defaultFormLoginPasswordEx"> <strong>DEPARTAMENTO: *</strong></label>
+            <label htmlFor="defaultFormLoginPasswordEx"> <strong>DEPARTAMENTO: </strong></label>
                         <input                                          
                               id="departamentoUpdate"
                               type="text"
                               name="departamentoUpdate"
                               onChange={this.onChangeInput2}
-                              value={this.state.departamentoUpdate }
+                              value={this.state.departamentoUpdate}
                               className="form-control"             
                               />
             </Col>
