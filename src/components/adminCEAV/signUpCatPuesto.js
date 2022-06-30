@@ -54,7 +54,6 @@ class catalogoPuesto extends Component{
           `  }           
        })
      .then(response => { 
-       console.log("esto es response de get",response)
         this.setState({tablaPuesto:response.data.data.getTablaPuesto}) 
       })
       .catch(err=>{

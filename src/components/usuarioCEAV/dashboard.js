@@ -8,6 +8,7 @@ import imagenCEAV from '../imagen/CEAVlogo.png'
 import {API} from '../Graphql/Graphql';
 import MUIDataTable from "mui-datatables";
 import {  Card, Form as form} from 'antd';
+import ceav from '../imagen/logo.png'
 
 const { Header, Content, Footer} = Layout;
 
@@ -146,12 +147,9 @@ class Dashboard extends Component{
       </Content>
       <Footer className='footer main'>
       <center>
-      <FcGoogle />&nbsp;<a href="https://www.gob.mx/ceav" target="_blank">https://www.gob.mx/ceav</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <MDBIcon far icon="envelope" />&nbsp;<a href="comunicacionsocial@ceav.gob.mx" target="_blank">comunicacionsocial@ceav.gob.mx</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <MDBIcon fab icon="twitter" /><a href="@CEAVmex" target="_blank"> @CEAVmex</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <MDBIcon fab icon="facebook" /><a href="https://www.facebook.com/CEAVmex" target="_blank"> @CEAVmex</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <MDBIcon fab icon="instagram" /><a href="https://www.instagram.com/ceav_cs" target="_blank"> @ceav_cs</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      
-      </center>
+      <FcGoogle />&nbsp;<a href="https://www.gob.mx/ceav" target="_blank">www.gob.mx/ceav</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <MDBIcon/><img src={ceav} width="30" height="30"  alt="" /><a href="http://intranet/" target="_blank">intranet/</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+     </center>
       </Footer>  
             </React.Fragment> 
         )

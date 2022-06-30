@@ -66,7 +66,6 @@ class loginAdmin extends Component{
                 `
             }   
              }).then(response=>{
-                 console.log("esto es response",response)
                  let mensaje = response.data.data.loginDataAdmin.message
                 if(mensaje ==="login exitoso"){                    
                     localStorage.setItem("id_admin",response.data.data.loginDataAdmin.id_admin)                    
@@ -74,10 +73,7 @@ class loginAdmin extends Component{
                     localStorage.setItem("apellidos",response.data.data.loginDataAdmin.apellidos) 
                     localStorage.setItem("correo",response.data.data.loginDataAdmin.correo)                                  
                     localStorage.setItem("TokenAdmin",response.data.data.loginDataAdmin.token)
-
-                    this.props.history.push("/sideNavAdmin")
-                      
-                      
+                    this.props.history.push("/sideNavAdmin")   
                     swal({
                         title:"Bienvenido!",
                         text:"Inicio de sesión exitoso",

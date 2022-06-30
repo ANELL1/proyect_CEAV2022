@@ -21,10 +21,10 @@ class catalogoArea extends Component{
             tablarenderArea:false,
             ArrayArea:[],
             modal:false,  
-            id_areaUpdate:"",     
-            nombreAreaUpdate:"",
-            nomeclaturaUpdate:"",
-            numSerieUpdate:"",
+            id_areaUpdate:'',     
+            nombreAreaUpdate:'',
+            nomeclaturaUpdate:'',
+            numSerieUpdate:'',
             
 
         }

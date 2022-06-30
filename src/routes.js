@@ -26,6 +26,7 @@ import catalogoPersonal from './components/adminCEAV/signUpCatPersonal'
 import catalogoRoles from './components/adminCEAV/signUpCatRoles'
 import catalogoPuesto from './components/adminCEAV/signUpCatPuesto';
 import pass from './components/adminCEAV/changePassword'
+import notificaciones from './components/adminCEAV/fechaNotificaciones'
  
 class App extends Component{
 
@@ -60,7 +61,7 @@ render(){
        <PrivateRouteAdmin exact path={"/puesto"} component={catalogoPuesto}/>
        <PrivateRouteAdmin exact path={"/roles"} component={catalogoRoles}/>
        <PrivateRouteAdmin exact path={"/cambioPass"} component={pass}/>
-       {/* <Route exact path= "/sin" component={singUp}/> */}
+       <PrivateRouteAdmin exact path= "/notificaciones" component={notificaciones}/>
 
        {/* <Route exact path={"/sideNavAdmin"} component={sideNavAdmin}/> */}
       </main>  

@@ -305,12 +305,6 @@ class tablaDataEmpleado extends Component{
       let fk_puesto = this.state.id_puestoUpdate
       let fk_personal = this.state.id_personalUpdate
       let fk_nivel = this.state.fk_nivelUpdate
-      // id_empleado,nombre,apellidos,curp,rfc,correo,numEmpleado,telefono,ext,statusEmpleado,departamento,
-      // fk_oficinas,fk_area,fk_puesto,fk_nivel,fk_personal
-//  console.log("id_empleado",id_empleado,"nombre",nombre,"apellidos",apellidos,"curp",curp)
-//  console.log("rfc",rfc,"correo",correo,"numEmpleado",numEmpleado,"telefono",telefono)
-//  console.log("ext",ext,"statusEmpleado",statusEmpleado,"departamento",departamento,"fk_oficinas",fk_oficinas)
-//  console.log("fk_area",fk_area,"fk_puesto",fk_puesto,"fk_personal",fk_personal,"fk_nivel",fk_nivel)
       if( nombre && apellidos  &&  correo && numEmpleado && telefono  && statusEmpleado ){  
           axios({
          url: API,

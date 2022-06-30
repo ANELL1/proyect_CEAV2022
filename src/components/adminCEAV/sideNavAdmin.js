@@ -21,7 +21,8 @@ import { MenuUnfoldOutlined,MenuFoldOutlined ,SolutionOutlined,IdcardOutlined,Ba
 import './sideNavAdmin.css'
 import imagenCEAV from '../imagen/CEAVlogo.png'
 import tablaDataEmpleado from './tablaDataEmpleados';
-import FechaNotificaciones  from './fechaNotificaciones'
+import Fechanotificaciones  from './fechaNotificaciones'
+import ceav from '../imagen/logo.png'
 
 class sideNavAdmin extends Component{
     constructor(props){
@@ -225,7 +226,7 @@ class sideNavAdmin extends Component{
          if(this.state.sideFechasNotificaciones === true)
          tablaFechaNotificaciones = 
          <div>
-          <tablaFechaNotificaciones/>
+          <Fechanotificaciones/>
          </div>
  
 
@@ -293,13 +294,12 @@ class sideNavAdmin extends Component{
                         {tablaDataEmpleado}
                         {tablaFechaNotificaciones}
                 </Layout>
-                </Layout>
-                <Footer  className="piePag">
-                <FcGoogle />&nbsp;<a href="https://www.gob.mx/ceav" target="_blank">https://www.gob.mx/ceav</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <MDBIcon far icon="envelope" />&nbsp;<a href="comunicacionsocial@ceav.gob.mx" target="_blank">comunicacionsocial@ceav.gob.mx</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <MDBIcon fab icon="twitter" /><a href="@CEAVmex" target="_blank"> @CEAVmex</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <MDBIcon fab icon="facebook" /><a href="https://www.facebook.com/CEAVmex" target="_blank"> @CEAVmex</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <MDBIcon fab icon="instagram" /><a href="https://www.instagram.com/ceav_cs" target="_blank"> @ceav_cs</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    
+                </Layout>                
+                <Footer  className='footer main'>
+                <center>
+                <FcGoogle />&nbsp;<a href="https://www.gob.mx/ceav" target="_blank">www.gob.mx/ceav</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <MDBIcon/><img src={ceav} width="30" height="30"  alt="" /><a href="http://intranet/" target="_blank">intranet/</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                </center>
                 </Footer>
                 
             </React.Fragment>
