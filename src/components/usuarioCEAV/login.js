@@ -70,7 +70,6 @@ class login extends Component{
                 `
             }   
              }).then(response=>{
-                 console.log("esto es response",response)
                  let mensaje = response.data.data.loginEmpleado.message
                 if(mensaje ==="login exitoso"){                    
                     localStorage.setItem("id_empleado",response.data.data.loginEmpleado.id_empleado)                    

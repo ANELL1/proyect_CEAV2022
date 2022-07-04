@@ -12,7 +12,6 @@ import ceav from '../imagen/logo.png'
 
 const { Header, Content, Footer} = Layout;
 
-
 class Dashboard extends Component{
     constructor(props){
         super(props)
@@ -68,6 +67,7 @@ class Dashboard extends Component{
     render(){ 
         let tablaInicio;
         let data1;
+        let array=[];
 
         const options={ 
             filterType:"drowpdawn",
@@ -112,9 +112,14 @@ class Dashboard extends Component{
             },      
           }        
           } 
-          const columns = ["NO. EMPLEADO","NOMBRE","APELLIDOS","CORREO","EXT.","PUESTO","UNIDAD ADMINISTRATIVA"];  
 
-              data1 = this.state.tablaEmpledos.map((rows)=>{                
+          const columns = ["NO. EMPLEADO","NOMBRE","APELLIDOS","CORREO","EXT.","PUESTO","UNIDAD ADMINISTRATIVA"];  
+          this.state.tablaEmpledos.map((rows)=>{ 
+           if(rows.statusEmpleado ==="true") {
+             array.push(rows)
+           }
+         })
+              data1 = array.map((rows)=>{                
                     return([rows.numEmpleado,rows.nombre,rows.apellidos,rows.correo,rows.ext,rows.puesto,rows.nombreArea,])
   
                   })           

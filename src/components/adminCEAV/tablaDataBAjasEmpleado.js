@@ -9,7 +9,7 @@ import swal from 'sweetalert'
 import {Row,Col,Form,input} from 'reactstrap';
 import { UserOutlined} from '@ant-design/icons';
 
-class tablaDataEmpleado extends Component{
+class tablaDataBAjaEmpleado extends Component{
   constructor(props){
     super(props)
     this.state={
@@ -135,7 +135,6 @@ class tablaDataEmpleado extends Component{
              })
            .then(response => { 
               this.setState({tablaEmpledos:response.data.data.getTablaDataEmpleado})
-
             })
             .catch(err=>{
                console.log('error' ,err.response)
@@ -355,82 +354,6 @@ class tablaDataEmpleado extends Component{
         })
       }      
      };
-
-// **************************************
-// onSubmitBtn =  (e)=>{ 
-//   e.preventDefault(); 
-//   let id_empleado = this.state.id_empleadoUpdate
-//   let nombre = this.state.nombreUpdate.toUpperCase()
-//   let apellidos = this.state.apellidosUpdate.toUpperCase()
-//   let curp = this.state.curpUpdate.toUpperCase()
-//   let rfc = this.state.rfcUpdate.toUpperCase()
-//   let correo = this.state.correoUpdate
-//   let numEmpleado = this.state.numEmpleadoUpdate
-//   let telefono = this.state.telefonoUpdate
-//   let ext = this.state.extUpdate 
-//   let statusEmpleado = this.state.statusEmpleadoUpdate
-//   let departamento = this.state.departamentoUpdate
-//   let fk_oficinas = this.state.id_oficinaUpdate
-//   let fk_area = this.state.id_areaUpdate
-//   let fk_puesto = this.state.id_puestoUpdate
-//   let fk_personal = this.state.id_personalUpdate
-//   let fk_nivel = this.state.fk_nivelUpdate
-//   if( nombre && apellidos  &&  correo && numEmpleado && telefono  && statusEmpleado ){  
-//     if(statusEmpleado ==="false"){
-//       axios({
-//         url: API,
-//         method: "post",
-//         data: {
-//           query: `
-//                   mutation{
-//                    updateEmpleados(data:"${[id_empleado,nombre,apellidos,curp,rfc,correo,numEmpleado,telefono,ext,statusEmpleado,departamento,fk_oficinas,fk_area,fk_puesto,fk_nivel,fk_personal]}"){  
-//                       message
-//                        } 
-//                   }
-//                   `
-//         }
-//       })
-//     .then((response) => {   
-//       console.log("response",response)  
-//     }).catch((err) => {
-//       console.log("error", err.response);
-//     }); 
-    
-//       axios({
-//         url: API,
-//         method: "post",
-//         data: {
-//           query: `
-//                   mutation{
-//                   signupDataFechanotificaciones(data:"${[fechaAlta,fechaBaja,fechaNotificacionAlta,fechaNotificacionBaja,numEmpleado]}"){  
-//                       message
-//                       } 
-//                   }
-//                   `
-//         }
-//       })
-//         .then(response => {     
-//             swal({              
-//             title: "Registro exitoso!",               
-//             icon: "success",
-//             button:false,
-//             timer: 3000
-//           });  
-//         }).catch((err) => {
-//           console.log("error", err.response);
-//         });   
-//           window.location.reload() 
-//     } 
-// }
-// else{
-//     swal({
-//         text:"complete los campos requeridos",
-//         icon:"warning"
-//     })
-// }
-// };
-
-
     
     render(){   
 
@@ -671,7 +594,6 @@ class tablaDataEmpleado extends Component{
              type="select"
              name="id_puestoUpdate"
              id="id_puestoUpdate"
-            //  onClick={(e)=>this.nivel()}
              onChange={this.onChangeInput2}
              value={this.state.id_puestoUpdate}
              required
@@ -747,13 +669,13 @@ class tablaDataEmpleado extends Component{
     </MDBContainer>
       </div>
 
-          const columns = ["ID","NO. EMPLEADO","NOMBRE","UNIDAD ADMINISTRATIVA","PUESTO","CORREO","EXT.","EDITA","INF."];  
+          const columns = ["ID","NO. EMPLEADO","NOMBRE","UNIDAD ADMINISTRATIVA","FECHA ALTA Y BAJA (DD/MM/AA)","CORREO","EXT.","EDITA","INF."];  
           let data1  
           let array=[]        
 
           
            this.state.tablaEmpledos.map((rows)=>{ 
-            if(rows.statusEmpleado ==="true") {
+            if(rows.statusEmpleado ==="false") {
               array.push(rows)
             }
           })
@@ -774,7 +696,7 @@ class tablaDataEmpleado extends Component{
                 <MDBIcon  icon="info"/>
                 </Button>
                 </div> 
-               return([rows.id_empleado,rows.numEmpleado,rows.nombre +" "+ rows.apellidos,rows.nombreArea,rows.departamento,rows.correo,rows.ext,botonEditar,botonInformacion])
+               return([rows.id_empleado,rows.numEmpleado,rows.nombre +" "+ rows.apellidos,rows.nombreArea,"11/12/2018 - 11/12/2022 ",rows.correo,rows.ext,botonEditar,botonInformacion])
               })
           
      
@@ -782,7 +704,7 @@ class tablaDataEmpleado extends Component{
          <div>
            <Card  style={{marginTop:"1%",width:"95%" }}>  
            <MUIDataTable    
-           title={"DIRECTORIO CEAV" }
+           title={"DIRECTORIO DE BAJAS CEAV" }
            data={data1}
            columns={columns}
            options={options}
@@ -898,4 +820,4 @@ class tablaDataEmpleado extends Component{
       </React.Fragment>
         )
     }
-}export default tablaDataEmpleado;
+}export default tablaDataBAjaEmpleado;

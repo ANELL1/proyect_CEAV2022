@@ -83,7 +83,6 @@ class Index extends Component{
                 `  }           
              })
            .then(response => { 
-            console.log("estro es data",response)
               this.setState({tablaEmpledos:response.data.data.getTablaDataEmpleado}) 
             })
             .catch(err=>{
@@ -184,7 +183,16 @@ class Index extends Component{
           </MDBContainer>
 
           const columns = ["ID","NOMBRE", "APELLIDOS", "ÁREA", "CORREO ELECTRÓNICO","TELÉFONO","EXT."];  
-         let data1 = this.state.tablaEmpledos.map((rows)=>{  
+          let array=[]   
+          let data1;     
+
+          
+          this.state.tablaEmpledos.map((rows)=>{ 
+           if(rows.statusEmpleado ==="true") {
+             array.push(rows)
+           }
+         })
+          data1 = this.state.tablaEmpledos.map((rows)=>{  
      
                  
               return([rows.numEmpleado,rows.nombre,rows.apellidos,rows.nombreArea,rows.correo,rows.telefono,rows.ext])

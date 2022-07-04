@@ -22,6 +22,7 @@ import './sideNavAdmin.css'
 import imagenCEAV from '../imagen/CEAVlogo.png'
 import tablaDataEmpleado from './tablaDataEmpleados';
 import Fechanotificaciones  from './fechaNotificaciones'
+import TablaBajas from './tablaDataBAjasEmpleado'
 import ceav from '../imagen/logo.png'
 
 class sideNavAdmin extends Component{
@@ -38,6 +39,7 @@ class sideNavAdmin extends Component{
             sideNavChangePass:false,
             sideNavTablaDirectorio:true,
             sideFechasNotificaciones:false,
+            sideTablaBajas:false,
             collapsed:false, 
             tablaArea:[],
             tablaOficina:[],
@@ -66,6 +68,7 @@ class sideNavAdmin extends Component{
         this.setState({sideNavEmpleados:false})  
         this.setState({sideNavChangePass:false})
         this.setState({sideFechasNotificaciones:false})
+        this.setState({sideTablaBajas:false})
 
       }       
       sideNavArea(){
@@ -78,6 +81,7 @@ class sideNavAdmin extends Component{
         this.setState({sideNavEmpleados:false})  
         this.setState({sideNavChangePass:false}) 
         this.setState({sideFechasNotificaciones:false})
+        this.setState({sideTablaBajas:false})
       }
       sideNavOficinas(){
         this.setState({sideNavTablaDirectorio:false})
@@ -88,7 +92,8 @@ class sideNavAdmin extends Component{
         this.setState({sideNavRoles:false})
         this.setState({sideNavEmpleados:false})  
         this.setState({sideNavChangePass:false})
-        this.setState({sideFechasNotificaciones:false}) 
+        this.setState({sideFechasNotificaciones:false})
+        this.setState({sideTablaBajas:false}) 
       }
       sideNavPersonal(){
         this.setState({sideNavTablaDirectorio:false})
@@ -99,7 +104,8 @@ class sideNavAdmin extends Component{
         this.setState({sideNavRoles:false})
         this.setState({sideNavEmpleados:false})  
         this.setState({sideNavChangePass:false}) 
-        this.setState({sideFechasNotificaciones:false})      
+        this.setState({sideFechasNotificaciones:false})     
+        this.setState({sideTablaBajas:false}) 
       }
       sideNavPuesto(){
         this.setState({sideNavTablaDirectorio:false})
@@ -110,7 +116,8 @@ class sideNavAdmin extends Component{
         this.setState({sideNavRoles:false})
         this.setState({sideNavEmpleados:false})  
         this.setState({sideNavChangePass:false}) 
-        this.setState({sideFechasNotificaciones:false})  
+        this.setState({sideFechasNotificaciones:false}) 
+        this.setState({sideTablaBajas:false}) 
       }
       sideNavRoles(){
         this.setState({sideNavTablaDirectorio:false})
@@ -121,7 +128,8 @@ class sideNavAdmin extends Component{
         this.setState({sideNavRoles:true})
         this.setState({sideNavEmpleados:false})  
         this.setState({sideNavChangePass:false}) 
-        this.setState({sideFechasNotificaciones:false})    
+        this.setState({sideFechasNotificaciones:false}) 
+        this.setState({sideTablaBajas:false})   
       }
       sideNavEmpleados(){
         this.setState({sideNavTablaDirectorio:false})
@@ -132,7 +140,8 @@ class sideNavAdmin extends Component{
         this.setState({sideNavRoles:false})
         this.setState({sideNavEmpleados:true})  
         this.setState({sideNavChangePass:false}) 
-        this.setState({sideFechasNotificaciones:false})  
+        this.setState({sideFechasNotificaciones:false}) 
+        this.setState({sideTablaBajas:false}) 
       }
       sideNavChangePass(){
         this.setState({sideNavTablaDirectorio:false})
@@ -144,6 +153,7 @@ class sideNavAdmin extends Component{
         this.setState({sideNavEmpleados:false})  
         this.setState({sideNavChangePass:true})
         this.setState({sideFechasNotificaciones:false})
+        this.setState({sideTablaBajas:false})
       } 
       sideFechasNotificaciones(){
         this.setState({sideNavTablaDirectorio:false})
@@ -155,6 +165,19 @@ class sideNavAdmin extends Component{
         this.setState({sideNavEmpleados:false})  
         this.setState({sideNavChangePass:false})
         this.setState({sideFechasNotificaciones:true})
+        this.setState({sideTablaBajas:false})
+      }
+      sideTablaBajas(){
+        this.setState({sideNavTablaDirectorio:false})
+        this.setState({sideNavArea:false})
+        this.setState({sideNavOficinas:false})
+        this.setState({sideNavPersonal:false})
+        this.setState({sideNavPuesto:false})
+        this.setState({sideNavRoles:false})
+        this.setState({sideNavEmpleados:false})  
+        this.setState({sideNavChangePass:false})
+        this.setState({sideFechasNotificaciones:false})
+        this.setState({sideTablaBajas:true})
       }
 
 
@@ -173,6 +196,7 @@ class sideNavAdmin extends Component{
         let tablaChangePass;
         let tablaDataEmpleado;
         let tablaFechaNotificaciones
+        let tablaBajasEmpleados;
 
          if(this.state.sideNavArea ===true){
             tablaArea= 
@@ -228,6 +252,12 @@ class sideNavAdmin extends Component{
          <div>
           <Fechanotificaciones/>
          </div>
+         if(this.state.sideTablaBajas === true){
+          tablaBajasEmpleados = 
+          <div>
+            <TablaBajas/>
+          </div>
+         }
  
 
         let menu=
@@ -260,7 +290,10 @@ class sideNavAdmin extends Component{
         <Menu.Item key="9"  onClick={e=>this.sideFechasNotificaciones()} icon={<MDBIcon icon="user-clock"  style={{ fontSize: '20px', color: '#000' }} />}>           
          NOTIFICACIÓN ALTA Y BAJAS              
         </Menu.Item>
-        <Menu.Item key="10" onClick={e=>this.cerrar()} icon={<MDBIcon icon="door-open" style={{ fontSize: '20px', color: '#000' }} />}>           
+        <Menu.Item key="10" onClick={e=>this.sideTablaBajas()} icon={<MDBIcon icon="user-alt-slash"  style={{ fontSize: '20px', color: '#000' }} />}>           
+          LISTA DE BAJAS          
+        </Menu.Item>
+        <Menu.Item key="11" onClick={e=>this.cerrar()} icon={<MDBIcon icon="door-open" style={{ fontSize: '20px', color: '#000' }} />}>           
           CERRAR SESIÓN            
         </Menu.Item>
         </Menu>
@@ -293,6 +326,7 @@ class sideNavAdmin extends Component{
                         {tablaChangePass}
                         {tablaDataEmpleado}
                         {tablaFechaNotificaciones}
+                        {tablaBajasEmpleados}
                 </Layout>
                 </Layout>                
                 <Footer  className='footer main'>

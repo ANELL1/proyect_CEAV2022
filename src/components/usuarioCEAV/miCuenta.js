@@ -65,7 +65,6 @@ class MiCuentas extends Component{
                 `
             }   
              }).then(datos=>{
-                 console.log("esto es datos getEmpleadosByCorreo",datos)
                  if(datos.data.data.getEmpleadosByCorreo[0]){
                      this.setState({dataEmpleados:datos.data.data.getEmpleadosByCorreo[0]})
                  }else{
@@ -92,7 +91,6 @@ class MiCuentas extends Component{
     }
 
     onSubmitBtn = ()=>{ 
-      // console.log.log("estado de dataEmpleados.id_empleado", this.state.dataEmpleados) 
       if(this.state.pass){
           axios({
               url:API,
@@ -107,7 +105,6 @@ class MiCuentas extends Component{
                   `
               }   
                }).then(datos=>{
-                   console.log("datos updatePasswordEmpleados",datos)
                    if(datos.data.data.updatePasswordEmpleados.message === "actualización exitosa"){
                       swal({
                         icon:"success",

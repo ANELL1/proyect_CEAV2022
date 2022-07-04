@@ -52,7 +52,6 @@ class loginAdminAlfa extends Component{
                     `
                 }   
                  }).then(datos=>{
-                     console.log("esto es datos getEmpleadosByCorreo",datos)
                      if(datos.data.data.getEmpleadosByCorreo[0]){
                          this.setState({dataEmpleados:datos.data.data.getEmpleadosByCorreo[0]})
                      }else{
@@ -85,7 +84,6 @@ class loginAdminAlfa extends Component{
                     `
                 }   
                  }).then(datos=>{
-                     console.log("datos updatePasswordEmpleados",datos)
                      if(datos.data.data.updatePasswordEmpleados.message === "actualización exitosa"){
                         alert(`Contraseña para ${this.state.dataEmpleados.correo} Actualizada`);
                         window.location.reload()
