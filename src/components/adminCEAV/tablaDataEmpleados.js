@@ -45,6 +45,10 @@ class tablaDataEmpleado extends Component{
       id_nivelUpdate:'',
       nombreNivelUpdate:'',
       fk_puesto:'',
+      fk_extensiones:'',
+      statusExtensionUpdate:'',
+      numExtensionUpdate:'',
+      id_extensionUpdate:'',
       arrayOficina:[],
       arrayArea:[],
       arrayPersonal:[],
@@ -52,7 +56,10 @@ class tablaDataEmpleado extends Component{
       getTablaNivel:[],
       fk_nivelUpdate:'',
       tablaFilterEmpledos:[],
-      filtro:[]
+      filtro:[],
+      tablaExtLibre:[],
+      tablaExt:[]
+      
       
     }
     this.toggle = this.toggle.bind(this) 
@@ -84,8 +91,7 @@ class tablaDataEmpleado extends Component{
                     rfc
                     correo
                     numEmpleado
-                    telefono
-                    ext
+                    telefono                    
                     dependencia
                     statusEmpleado
                     departamento
@@ -121,19 +127,26 @@ class tablaDataEmpleado extends Component{
                     fechaBaja
                     fechaNotificacionAlta
                     fechaNotificacionBaja
-                    fk_oficinas
-                    fk_rol
+                    fk_oficinas                   
                     fk_area
                     fk_puesto
                     fk_nivel
                     fk_personal
                     id_oficina
+                    id_extension
+                    numExtension
+                    statusExtension
+                    fk_extensiones
+                    id_extension
+                    numExtension
+                    statusExtension
                     message 
                     } 
                 }
                 `  }           
              })
            .then(response => { 
+            console.log("response de actualializacion empleado",response)
               this.setState({tablaEmpledos:response.data.data.getTablaDataEmpleado})
 
             })
@@ -241,13 +254,56 @@ class tablaDataEmpleado extends Component{
                   .catch(err=>{
                      console.log('error' ,err.response)
                   }) 
+                  axios({
+                    url:API,
+                    method:'post',
+                    data:{
+                      query:`
+                        query{   
+                          getTablaCatExtensiones(data:"${[]}"){
+                                id_extension
+                                numExtension                    
+                                statusExtension
+                                message
+                            } 
+                        }
+                        `  }           
+                     })
+                   .then(response => { 
+                      this.setState({tablaExt:response.data.data.getTablaCatExtensiones}) 
+                    })
+                    .catch(err=>{
+                       console.log('error' ,err.response)
+                    }) 
+                    axios({
+                      url:API,
+                      method:'post',
+                      data:{
+                        query:`
+                          query{   
+                            getTablaCatExtensionesLibres(data:"${[]}"){
+                                  id_extension
+                                  numExtension                    
+                                  statusExtension
+                                  message
+                              } 
+                          }
+                          `  }           
+                       })
+                     .then(response => {                    
+                        this.setState({tablaExtLibre:response.data.data.getTablaCatExtensionesLibres}) 
+                        console.log("response  lista libres",this.state.tablaExtLibre)
+                      })
+                      .catch(err=>{
+                         console.log('error' ,err.response)
+                      }) 
     }
 
     onChangeInput2 =(e)=>{
       const {id,value} = e.target;
       this.setState({
           [id]:value
-      })
+      })    
     } 
 
     editar(id){
@@ -274,7 +330,11 @@ class tablaDataEmpleado extends Component{
         fk_puesto:id.fk_puesto,
         fk_nivelUpdate:id.fk_nivel,
         id_nivelUpdate:id.id,
-        departamentoUpdate:id.departamento
+        departamentoUpdate:id.departamento,
+        statusExtensionUpdate:id.statusExtension,
+        numExtensionUpdate:id.numExtension,
+        id_extensionUpdate:id.id_extension,
+        
         // fk_nivelUpdate:id.nivel
       })   
       this.setState({
@@ -291,7 +351,7 @@ class tablaDataEmpleado extends Component{
     }
 
 
-    onSubmitBtn2 = (e)=>{  
+    onSubmitBtn2 = async (e)=>{  
       e.preventDefault(); 
       let id_empleado = this.state.id_empleadoUpdate
       let nombre = this.state.nombreUpdate.toUpperCase()
@@ -301,38 +361,41 @@ class tablaDataEmpleado extends Component{
       let correo = this.state.correoUpdate
       let numEmpleado = this.state.numEmpleadoUpdate
       let telefono = this.state.telefonoUpdate
-      let ext = this.state.extUpdate 
+      // let ext = this.state.extUpdate 
       let statusEmpleado = this.state.statusEmpleadoUpdate
-      let departamento = this.state.departamentoUpdate
+      let departamento = this.state.departamentoUpdate.toUpperCase()
       let fk_oficinas = this.state.id_oficinaUpdate
       let fk_area = this.state.id_areaUpdate
       let fk_puesto = this.state.id_puestoUpdate
       let fk_personal = this.state.id_personalUpdate
       let fk_nivel = this.state.fk_nivelUpdate
-      if( nombre && apellidos  &&  correo && numEmpleado && telefono  && statusEmpleado ){  
+      let fk_extension = this.state.id_extensionUpdate
+      let statusExtencion
+
+      if( nombre && apellidos  &&  correo && numEmpleado && telefono  && statusEmpleado ){    
           axios({
          url: API,
          method: "post",
          data: {
            query: `
                    mutation{
-                    updateEmpleados(data:"${[id_empleado,nombre,apellidos,curp,rfc,correo,numEmpleado,telefono,ext,statusEmpleado,departamento,fk_oficinas,fk_area,fk_puesto,fk_nivel,fk_personal]}"){  
+                    updateEmpleados(data:"${[id_empleado,nombre,apellidos,curp,rfc,correo,numEmpleado,telefono,statusEmpleado,departamento,fk_oficinas,fk_area,fk_puesto,fk_nivel,fk_personal,fk_extension]}"){  
                        message
                         } 
                    }
                    `
          }
        })
-         .then((response) => {
+         .then((response) => {  
           if(response.data.data.updateEmpleados.message === "actualizacion exitosa"){
              swal({              
-             title:"Registro exitoso!",   
+             title:"actualizacion exitosa!",   
              text:"los datos se actualizaron correctamente",          
              icon:"success",
              button:true
            }); 
            setTimeout(function(){
-             window.location.reload()
+             window.location.reload() 
               }, 1500); 
          }else{
           swal({
@@ -341,10 +404,32 @@ class tablaDataEmpleado extends Component{
              icon: "error",
              button:false
            }); 
-         }          
+         }     
+
          }).catch((err) => {
            console.log("error", err.response);
          });
+         if(statusEmpleado === "false"  ){
+          console.log("esta entrando")
+     statusExtencion ="libre"
+    await axios({
+        url: API,
+        method: "post",
+        data: {
+          query: `
+                  mutation{
+                    updateExtensiones(data:"${[fk_extension,statusExtencion]}"){  
+                      message
+                      } 
+                  }
+                  `
+        }
+      })
+        .then(response => {
+        }).catch((err) => {
+          console.log("error", err.response);
+        });   
+        }
        } else{
         swal({
           title:"",
@@ -367,7 +452,7 @@ class tablaDataEmpleado extends Component{
 //   let correo = this.state.correoUpdate
 //   let numEmpleado = this.state.numEmpleadoUpdate
 //   let telefono = this.state.telefonoUpdate
-//   let ext = this.state.extUpdate 
+//   // let ext = this.state.extUpdate 
 //   let statusEmpleado = this.state.statusEmpleadoUpdate
 //   let departamento = this.state.departamentoUpdate
 //   let fk_oficinas = this.state.id_oficinaUpdate
@@ -375,15 +460,17 @@ class tablaDataEmpleado extends Component{
 //   let fk_puesto = this.state.id_puestoUpdate
 //   let fk_personal = this.state.id_personalUpdate
 //   let fk_nivel = this.state.fk_nivelUpdate
-//   if( nombre && apellidos  &&  correo && numEmpleado && telefono  && statusEmpleado ){  
-//     if(statusEmpleado ==="false"){
-//       axios({
+//   let id_extension = this.state.id_extensionUpdate
+//   let statusExtencion 
+//   if( nombre && apellidos  &&  correo && numEmpleado && telefono  && statusEmpleado ){      
+//   console.log("entro")
+//     axios({
 //         url: API,
 //         method: "post",
 //         data: {
 //           query: `
 //                   mutation{
-//                    updateEmpleados(data:"${[id_empleado,nombre,apellidos,curp,rfc,correo,numEmpleado,telefono,ext,statusEmpleado,departamento,fk_oficinas,fk_area,fk_puesto,fk_nivel,fk_personal]}"){  
+//                    updateEmpleados(data:"${[id_empleado,nombre,apellidos,curp,rfc,correo,numEmpleado,telefono,statusEmpleado,departamento,fk_oficinas,fk_area,fk_puesto,fk_nivel,fk_personal]}"){  
 //                       message
 //                        } 
 //                   }
@@ -391,36 +478,40 @@ class tablaDataEmpleado extends Component{
 //         }
 //       })
 //     .then((response) => {   
+
 //       console.log("response",response)  
 //     }).catch((err) => {
 //       console.log("error", err.response);
 //     }); 
-    
-//       axios({
-//         url: API,
-//         method: "post",
-//         data: {
-//           query: `
-//                   mutation{
-//                   signupDataFechanotificaciones(data:"${[fechaAlta,fechaBaja,fechaNotificacionAlta,fechaNotificacionBaja,numEmpleado]}"){  
-//                       message
-//                       } 
-//                   }
-//                   `
-//         }
-//       })
-//         .then(response => {     
-//             swal({              
-//             title: "Registro exitoso!",               
-//             icon: "success",
-//             button:false,
-//             timer: 3000
-//           });  
-//         }).catch((err) => {
-//           console.log("error", err.response);
-//         });   
-//           window.location.reload() 
-//     } 
+//     // if(statusEmpleado = "false"){
+//     //   console.log("entro")
+//     // statusExtencion ="libre"
+//     // await  axios({
+//     //     url: API,
+//     //     method: "post",
+//     //     data: {
+//     //       query: `
+//     //               mutation{
+//     //                 updateExtensiones(data:"${[id_extension,statusExtencion]}"){  
+//     //                   message
+//     //                   } 
+//     //               }
+//     //               `
+//     //     }
+//     //   })
+//     //     .then(response => {  
+//     //       console.log("esto es response",response)   
+//     //         swal({              
+//     //         title: "Registro exitoso!",               
+//     //         icon: "success",
+//     //         button:false,
+//     //         timer: 3000
+//     //       });  
+//     //     }).catch((err) => {
+//     //       console.log("error", err.response);
+//     //     });   
+//     //       // window.location.reload() 
+//     // } 
 // }
 // else{
 //     swal({
@@ -429,10 +520,7 @@ class tablaDataEmpleado extends Component{
 //     })
 // }
 // };
-
-
-    
-    render(){   
+    render(){ 
 
        let botonEditar;   
        let botonInformacion; 
@@ -551,7 +639,7 @@ class tablaDataEmpleado extends Component{
           <br></br>
           <Row>
           <Col xs="6">       
-            <label htmlFor="defaultFormLoginPasswordEx"> <strong>CURP: </strong></label>
+            <label htmlFor="defaultFormLoginPasswordEx"> <strong>CURP:</strong></label>
                         <input                                          
                               id="curpUpdate"
                               type="text"
@@ -562,7 +650,7 @@ class tablaDataEmpleado extends Component{
                               />
             </Col>  
             <Col xs="6">       
-            <label htmlFor="defaultFormLoginPasswordEx"> <strong>RFC: </strong></label>
+            <label htmlFor="defaultFormLoginPasswordEx"> <strong>RFC:</strong></label>
                         <input                                          
                               id="rfcUpdate"
                               type="text"
@@ -611,6 +699,24 @@ class tablaDataEmpleado extends Component{
                               className="form-control"             
                               />
             </Col>
+            {/* <Col xs="6">
+            <label htmlFor="defaultFormLoginPasswordEx">Ext:</label>
+            <select
+             className="browser-default custom-select"
+             type="select"
+             name="extUpdate"
+             id="extUpdate"
+             onChange={this.onChangeInput2}
+             value={this.state.id_extensionUpdate}
+            //  required
+                  >
+              { this.state.tablaExt.map(rows=>{
+                return (
+                <option value={rows.id_extension}>{rows.numExtension +" "+rows.statusExtension }</option>
+                )
+              })}
+            </select>   
+            </Col>  */}
             <Col xs="6">       
             <label htmlFor="defaultFormLoginPasswordEx"> <strong>DEPARTAMENTO: </strong></label>
                         <input                                          
@@ -774,7 +880,7 @@ class tablaDataEmpleado extends Component{
                 <MDBIcon  icon="info"/>
                 </Button>
                 </div> 
-               return([rows.id_empleado,rows.numEmpleado,rows.nombre +" "+ rows.apellidos,rows.nombreArea,rows.departamento,rows.correo,rows.ext,botonEditar,botonInformacion])
+               return([rows.id_empleado,rows.numEmpleado,rows.nombre +" "+ rows.apellidos,rows.nombreArea,rows.departamento,rows.correo,rows.numExtension,botonEditar,botonInformacion])
               })
           
      
@@ -824,7 +930,7 @@ class tablaDataEmpleado extends Component{
                       <br></br>               
                     <MDBCardTitle>{infEmpleado.nombre}&nbsp;{infEmpleado.apellidos}</MDBCardTitle>
                     <MDBCardText><MDBIcon far icon="envelope" />&nbsp;{infEmpleado.correo}</MDBCardText>
-                    <MDBCardText><MDBIcon icon="phone" />&nbsp;{infEmpleado.telefono}&nbsp; Ext:{infEmpleado.ext}</MDBCardText>
+                    <MDBCardText><MDBIcon icon="phone" />&nbsp;{infEmpleado.telefono}&nbsp; Ext:&nbsp;{infEmpleado.numExtension}</MDBCardText>
                     <MDBCardText>CURP:&nbsp;{infEmpleado.curp}</MDBCardText>
                     <MDBCardText>RFC:&nbsp;{infEmpleado.rfc}</MDBCardText>   
                     </center>

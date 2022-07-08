@@ -4,8 +4,7 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
  import'bootstrap-css-only/css/bootstrap.min.css'; 
 import'mdbreact/dist/css/mdb.css';
 import { MDBCol, MDBBtn, MDBCardBody, MDBView, MDBIcon,MDBRow} from 'mdbreact';
-import { DialogUtility } from '@syncfusion/ej2-popups';
-import { Form,Row} from 'reactstrap';
+import { Form} from 'reactstrap';
 // import './login.css'
 import {API} from '../Graphql/Graphql'
 import { Card } from 'antd';

@@ -3,13 +3,10 @@ import React,{Component} from 'react'
 import '@fortawesome/fontawesome-free/css/all.min.css';
  import'bootstrap-css-only/css/bootstrap.min.css'; 
 import'mdbreact/dist/css/mdb.css';
-import {  MDBRow,MDBIcon, MDBCol, MDBInput, MDBBtn, MDBCard,MDBCardBody, MDBView} from 'mdbreact';
+import {  MDBCol,  MDBBtn, MDBView} from 'mdbreact';
 import { Form } from 'reactstrap';
-// import './index.css'
 import {API} from '../Graphql/Graphql'
-import { Avatar,Card } from 'antd';
-import { Form as form, Input, Button, Checkbox,Select,Col } from 'antd';
-import { UserOutlined} from '@ant-design/icons';
+import { Form as form, Input, Button,Col,Card } from 'antd';
 
 class ChangePass extends Component{
     constructor(props){

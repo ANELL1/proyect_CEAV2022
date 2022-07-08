@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
-import { Layout, Menu, Avatar,Select } from 'antd';
-import { MDBIcon,MDBRow,MDBCol } from 'mdbreact';
+import { Layout } from 'antd';
+import { MDBIcon } from 'mdbreact';
 import './sidenav.css'
 import { FcGoogle } from "react-icons/fc";
 import imagenCEAV from '../imagen/CEAVlogo.png'

@@ -3,12 +3,11 @@ import React,{Component} from 'react'
 import '@fortawesome/fontawesome-free/css/all.min.css';
  import'bootstrap-css-only/css/bootstrap.min.css'; 
 import'mdbreact/dist/css/mdb.css';
-import {  MDBRow,MDBIcon, MDBCol, MDBInput, MDBBtn, MDBCard,MDBCardBody, MDBView} from 'mdbreact';
+import {  MDBIcon, MDBCol, MDBBtn, MDBView} from 'mdbreact';
 import { Form } from 'reactstrap';
-// import './index.css'
 import {API} from '../Graphql/Graphql'
-import { Avatar,Card } from 'antd';
-import { Form as form, Input, Button, Checkbox,Select,Col } from 'antd';
+import { Card } from 'antd';
+import { Form as form, Input,Col } from 'antd';
 
 class loginAdminAlfa extends Component{
     constructor(props){

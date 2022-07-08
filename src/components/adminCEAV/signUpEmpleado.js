@@ -35,7 +35,8 @@ class signUpEmpleado extends Component{
             // tablaPersonal:[],
             tablaPuesto:[],
             getTablaNivel:[],
-            fk_nivel:''
+            fk_nivel:'',
+            tablaExtLibre:[]
         }
          this.capturarFechaA = this.capturarFechaA.bind(this)
          this.capturarFechaB = this.capturarFechaB.bind(this)
@@ -46,6 +47,7 @@ class signUpEmpleado extends Component{
          this.handleChange5 = this.handleChange5.bind(this)
          this.fNotificacion = this.fNotificacion.bind(this)
          this.fNotificacionB = this.fNotificacionB.bind(this)
+         this.handleChange6 = this.handleChange6.bind(this)
 
     }
     componentDidMount(){
@@ -126,6 +128,27 @@ class signUpEmpleado extends Component{
               .catch(err=>{
                  console.log('error' ,err.response)
               }) 
+              axios({
+                url:API,
+                method:'post',
+                data:{
+                  query:`
+                    query{   
+                      getTablaCatExtensionesLibres(data:"${[]}"){
+                            id_extension
+                            numExtension                    
+                            statusExtension
+                            message
+                        } 
+                    }
+                    `  }           
+                 })
+               .then(response => { 
+                  this.setState({tablaExtLibre:response.data.data.getTablaCatExtensionesLibres}) 
+                })
+                .catch(err=>{
+                   console.log('error' ,err.response)
+                }) 
     }
 
     onChangeInput =(e)=>{
@@ -169,6 +192,9 @@ class signUpEmpleado extends Component{
     }
     handleChange5(value){      
       this.setState({fk_nivel:value})
+    }
+    handleChange6(value){      
+      this.setState({ext:value})
     }
 
 
@@ -343,10 +369,35 @@ class signUpEmpleado extends Component{
           <Input style={{ width: 400 }} placeholder="(55) 1000 2000" id="telefono" type="number" name="telefono" onChange={this.onChangeInput} value={this.state.telefono} />
         </Form.Item>
         </MDBCol>
-        <MDBCol>
+        {/* <MDBCol>
         <Form.Item label="EXT." >
           <Input style={{ width: 400 }} placeholder="0000" id="ext" type="number" name="ext" onChange={this.onChangeInput} value={this.state.ext} />
         </Form.Item>
+        </MDBCol> */}
+        <MDBCol>
+        <Form.Item label="EXT" required>
+                  <Select
+                   onChange={this.handleChange6}
+                   showSearch
+                   style={{ width: 400 }}
+                   placeholder="SELECCIONE SU EXTENSIÓN"
+                   optionFilterProp="children"
+                   filterOption={(input, option) =>
+                   option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                   }
+                   filterSort={(optionA, optionB) =>
+                   optionA.children.toLowerCase().localeCompare(optionB.children.toLowerCase())
+                   }   
+                  >
+                    <option value="411"  >SIN EXTENSIÓN</option>   
+                      { this.state.tablaExtLibre.map(rows=>{
+                        console.log("esto es rows de libres",rows)
+                          return (
+                          <option value  = {rows.id_extension} >{rows.numExtension}</option>                          
+                          )
+                        })}
+                  </Select>
+               </Form.Item>
         </MDBCol>
        <MDBCol>
         <Form.Item label="DEPARTAMENTO" >

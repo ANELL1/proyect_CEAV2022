@@ -1,6 +1,6 @@
 import  React, {Component} from "react"
-import { Table, Input, Button, Space,Tag, Card, Form as form} from 'antd';
-import {MDBIcon,MDBContainer,MDBModal,MDBModalHeader,MDBRow,MDBBtn,MDBCol,MDBModalBody,MDBModalFooter} from 'mdbreact'
+import { Card, Form as form} from 'antd';
+import {MDBContainer,MDBModal,MDBModalHeader,MDBBtn,MDBCol,MDBModalBody,MDBModalFooter} from 'mdbreact'
 import axios from 'axios'
 import {API} from '../Graphql/Graphql';
 import MUIDataTable from "mui-datatables";
