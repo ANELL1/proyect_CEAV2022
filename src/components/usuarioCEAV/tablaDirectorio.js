@@ -113,9 +113,7 @@ class Index extends Component{
     } 
 
     
-    render(){    
-       let botonEliminar;
-       let botonEditar;       
+    render(){        
        let modal;
 
       const options={ 
@@ -163,7 +161,6 @@ class Index extends Component{
       } 
       modal= 
       <MDBContainer>
-            {/* <MDBBtn onClick={this.toggle}>Modal</MDBBtn> */}
             <MDBModal isOpen={this.state.modal} toggle={this.toggle}>
             <Avatar                         
                         size={{ xs: 24, sm: 32, md: 40, lg: 64, xl: 80, xxl: 100 }}

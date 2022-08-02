@@ -77,7 +77,6 @@ class catalogoArea extends Component{
     }
     onChangeInput2 = (e) => {
       const { id, value } = e.target;  
-      // console.log("e",e.target)   
       this.setState({
         [id]: value
       });

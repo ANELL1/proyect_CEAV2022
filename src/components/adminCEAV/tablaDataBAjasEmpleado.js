@@ -8,6 +8,7 @@ import MUIDataTable from "mui-datatables";
 import swal from 'sweetalert'
 import {Row,Col,Form,input} from 'reactstrap';
 import { UserOutlined} from '@ant-design/icons';
+import { LocalConvenienceStoreOutlined } from "@material-ui/icons";
 
 class tablaDataBAjaEmpleado extends Component{
   constructor(props){
@@ -76,7 +77,7 @@ class tablaDataBAjaEmpleado extends Component{
             data:{
               query:`
                 query{   
-                  getTablaDataEmpleado(data:"${[""]}"){
+                  getTablaEmpleadoBAja(data:"${[""]}"){
                     id_empleado
                     nombre
                     apellidos
@@ -128,13 +129,18 @@ class tablaDataBAjaEmpleado extends Component{
                     fk_nivel
                     fk_personal
                     id_oficina
+                    id_fecha
+                    fechaAlta
+                    fechaBaja
+                    fechaNotificacionAlta
+                    fechaNotificacionBaja
                     message 
                     } 
                 }
                 `  }           
              })
            .then(response => { 
-              this.setState({tablaEmpledos:response.data.data.getTablaDataEmpleado})
+              this.setState({tablaEmpledos:response.data.data.getTablaEmpleadoBAja})
             })
             .catch(err=>{
                console.log('error' ,err.response)
@@ -669,7 +675,7 @@ class tablaDataBAjaEmpleado extends Component{
     </MDBContainer>
       </div>
 
-          const columns = ["ID","NO. EMPLEADO","NOMBRE","UNIDAD ADMINISTRATIVA","FECHA ALTA Y BAJA (DD/MM/AA)","CORREO","EXT.","EDITA","INF."];  
+          const columns = ["ID","NO. EMPLEADO","NOMBRE","UNIDAD ADMINISTRATIVA","FECHA ALTA","FECHA BAJA","CORREO","EXT.","EDITA","INF."];  
           let data1  
           let array=[]        
 
@@ -680,7 +686,31 @@ class tablaDataBAjaEmpleado extends Component{
             }
           })
 
-      data1 = array.map((rows)=>{      
+      data1 = array.map((rows)=>{  
+        // "rows.fechaAlta +"-"+ rows.fechaBaja " 
+        let fechaAlta;
+        const fecha1 = new Date(rows.fechaAlta); 
+        // fecha1.toLocaleDateString()
+        // console.log("fecha",fecha1)
+        var letrasM1 = new Array ("ENERO","FEBRERO","MARZO","ABRIL","MAYO","JUNIO","JULIO","AGOSTO","SEPTIEMBRE","OCTUBRE","NOVIEMBRE","DICIEMBRE"); 
+        let diaR = fecha1.getDate()
+        let MesSubstring1 = fecha1.getMonth() +1
+        let numeroPosicionMes1 = parseInt(MesSubstring1,10)
+        let mesR  = letrasM1[numeroPosicionMes1 - 1] 
+        let añoR = fecha1.getFullYear()  
+        fechaAlta = diaR +"/"+mesR+"/"+añoR
+        //  ***********   
+        let fechaBaja;          
+        const fechaA = new Date(rows.fechaBaja); 
+        var letrasM1 = new Array ("ENERO","FEBRERO","MARZO","ABRIL","MAYO","JUNIO","JULIO","AGOSTO","SEPTIEMBRE","OCTUBRE","NOVIEMBRE","DICIEMBRE"); 
+        let diaAlta = fechaA.getDate()
+        let MesSubstringA = fechaA.getMonth() +1
+        let numeroPosicionMesA = parseInt(MesSubstringA,10)
+        let mesA  = letrasM1[numeroPosicionMesA - 1] 
+        let añoA = fechaA.getFullYear()  
+        fechaBaja = diaAlta +"/"+mesA+"/"+añoA
+          
+    
                 botonEditar =
                  <div>            
                   <Button  style={{backgroundColor:"#95de64"}} shape="circle" size="large" onClick={(e)=>this.editar(rows)}>
@@ -696,7 +726,7 @@ class tablaDataBAjaEmpleado extends Component{
                 <MDBIcon  icon="info"/>
                 </Button>
                 </div> 
-               return([rows.id_empleado,rows.numEmpleado,rows.nombre +" "+ rows.apellidos,rows.nombreArea,"11/12/2018 - 11/12/2022 ",rows.correo,rows.ext,botonEditar,botonInformacion])
+               return([rows.id_empleado,rows.numEmpleado,rows.nombre +" "+ rows.apellidos,rows.nombreArea,fechaAlta,fechaBaja,rows.correo,rows.ext,botonEditar,botonInformacion])
               })
           
      

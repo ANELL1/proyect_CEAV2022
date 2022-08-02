@@ -391,7 +391,6 @@ class signUpEmpleado extends Component{
                   >
                     <option value="411"  >SIN EXTENSIÓN</option>   
                       { this.state.tablaExtLibre.map(rows=>{
-                        console.log("esto es rows de libres",rows)
                           return (
                           <option value  = {rows.id_extension} >{rows.numExtension}</option>                          
                           )

@@ -68,7 +68,6 @@ class loginAdminAlfa extends Component{
     }
 
     onSubmitBtn = ()=>{ 
-        // console.log.log("estado de dataEmpleados.id_empleado", this.state.dataEmpleados) 
         if(this.state.pass){
             axios({
                 url:API,

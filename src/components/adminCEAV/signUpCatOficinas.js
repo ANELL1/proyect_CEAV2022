@@ -6,7 +6,7 @@ import swal from 'sweetalert';
 import {Row,Col} from 'reactstrap'
 import {MDBBtn,MDBRow,MDBCol,MDBIcon,MDBContainer,MDBModal,MDBModalHeader,MDBModalBody,MDBModalFooter } from 'mdbreact'
 import MUIDataTable from "mui-datatables";
-import { MailOutlined,EditOutlined,IssuesCloseOutlined } from '@ant-design/icons';
+import { EditOutlined,IssuesCloseOutlined } from '@ant-design/icons';
 import './sideNavAdmin.css'
 
 class catalogoOficina extends Component{

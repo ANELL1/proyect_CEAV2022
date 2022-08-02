@@ -31,8 +31,8 @@ class Dashboard extends Component{
         }
 
     } 
-    async componentWillMount(){
-        await axios({
+     componentWillMount(){
+         axios({
                url:API,
                method:'post',
                data:{

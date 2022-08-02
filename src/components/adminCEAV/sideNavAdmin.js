@@ -1,32 +1,26 @@
 
 import React,{Component} from 'react'
 import { Layout,Menu } from 'antd';
-import { DesktopOutlined,UsergroupAddOutlined } from '@ant-design/icons';
-import axios from 'axios';
-import {API} from '../Graphql/Graphql'
+import { UsergroupAddOutlined } from '@ant-design/icons';
 import TablaArea from './signUpCatAreas'
 import TablaOficina from './signUpCatOficinas'
 import TablaPersonal from './signUpCatPersonal'
-// import TablaPuesto from './signUpCatPuesto'
 import TablaPuestos from './signUpCatPuesto'
 import TablaRoles from './signUpCatRoles'
 import TablaEmpleado from './signUpEmpleado'
 import TablaChangepass from './changePassword';
 import TablaDirectorio from './tablaDataEmpleados'
-// import
 import { FcGoogle } from "react-icons/fc";
 import { MDBIcon } from 'mdbreact'
-import { GrGroup } from "react-icons/gr";
 import { MenuUnfoldOutlined,MenuFoldOutlined ,SolutionOutlined,IdcardOutlined,BankOutlined } from '@ant-design/icons';
 import './sideNavAdmin.css'
 import imagenCEAV from '../imagen/CEAVlogo.png'
-import tablaDataEmpleado from './tablaDataEmpleados';
 import Fechanotificaciones  from './fechaNotificaciones'
 import TablaBajas from './tablaDataBAjasEmpleado'
 import ceav from '../imagen/logo.png'
 import TablaExt from './sigUpCatExtensiones'
 
-class sideNavAdmin extends Component{
+class SideNavAdmin extends Component{
     constructor(props){
         super(props)
         this.state={     
@@ -324,17 +318,17 @@ class sideNavAdmin extends Component{
         <Menu.Item key="10" onClick={e=>this.sideTablaBajas()} icon={<MDBIcon icon="user-alt-slash"  style={{ fontSize: '20px', color: '#000' }} />}>           
           LISTA DE BAJAS          
         </Menu.Item>
-        <Menu.Item key="10" onClick={e=>this.sideNavExt()} icon={<MDBIcon icon="phone"  style={{ fontSize: '20px', color: '#000' }} />}>           
+        <Menu.Item key="11" onClick={e=>this.sideNavExt()}  icon={<MDBIcon icon="phone"  style={{ fontSize: '20px', color: '#000' }} />}>           
           LISTA DE EXTENSIONES LIBRES           
         </Menu.Item>
-        <Menu.Item key="11" onClick={e=>this.cerrar()} icon={<MDBIcon icon="door-open" style={{ fontSize: '20px', color: '#000' }} />}>           
+        <Menu.Item key="12" onClick={e=>this.cerrar()} icon={<MDBIcon icon="door-open" style={{ fontSize: '20px', color: '#000' }} />}>           
           CERRAR SESIÓN            
         </Menu.Item>
         </Menu>
         </div>
         return(
             <React.Fragment> 
-                <Layout>     
+                <Layout >     
                 <Sider trigger={null} className="site-layout-background" collapsible collapsed={this.state.collapsed}>  
                 <center> 
                     <a>
@@ -342,14 +336,18 @@ class sideNavAdmin extends Component{
                     </a>
                     </center> 
                     <br></br>
-                    {menu}
+                    {menu}                     
                 </Sider>
-                <Layout className="site-layout" >       
-                    <Header className="site-layout-background1"  >   
+                <Layout className="site-layout" >  
+                    <Header className="site-layout-background1" > 
                     {React.createElement(this.state.collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
                         className: 'trigger',
                         onClick: this.toggle,              
                     }) } 
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;             
+                <FcGoogle/>&nbsp;<a href="https://www.gob.mx/ceav" target="_blank">www.gob.mx/ceav</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <MDBIcon/><img src={ceav} width="30" height="30"  alt="" /><a href="http://intranet/" target="_blank">intranet/</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                
                     </Header>         
                         {tablaArea}
                         {tablaOficina}
@@ -364,14 +362,14 @@ class sideNavAdmin extends Component{
                         {tablaExt}
                 </Layout>
                 </Layout>                
-                <Footer  className='footer main'>
+                {/* <Footer  className='footer main'>
                 <center>
                 <FcGoogle />&nbsp;<a href="https://www.gob.mx/ceav" target="_blank">www.gob.mx/ceav</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <MDBIcon/><img src={ceav} width="30" height="30"  alt="" /><a href="http://intranet/" target="_blank">intranet/</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 </center>
-                </Footer>
+                </Footer> */}
                 
             </React.Fragment>
         )
         }
-}export default sideNavAdmin
+}export default SideNavAdmin

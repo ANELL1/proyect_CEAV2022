@@ -146,7 +146,6 @@ class tablaDataEmpleado extends Component{
                 `  }           
              })
            .then(response => { 
-            console.log("response de actualializacion empleado",response)
               this.setState({tablaEmpledos:response.data.data.getTablaDataEmpleado})
 
             })
@@ -292,7 +291,6 @@ class tablaDataEmpleado extends Component{
                        })
                      .then(response => {                    
                         this.setState({tablaExtLibre:response.data.data.getTablaCatExtensionesLibres}) 
-                        console.log("response  lista libres",this.state.tablaExtLibre)
                       })
                       .catch(err=>{
                          console.log('error' ,err.response)
@@ -410,7 +408,6 @@ class tablaDataEmpleado extends Component{
            console.log("error", err.response);
          });
          if(statusEmpleado === "false"  ){
-          console.log("esta entrando")
      statusExtencion ="libre"
     await axios({
         url: API,
@@ -864,7 +861,9 @@ class tablaDataEmpleado extends Component{
             }
           })
 
-      data1 = array.map((rows)=>{      
+      data1 = array.map((rows)=>{     
+    
+    
                 botonEditar =
                  <div>            
                   <Button  style={{backgroundColor:"#95de64"}} shape="circle" size="large" onClick={(e)=>this.editar(rows)}>
@@ -880,13 +879,14 @@ class tablaDataEmpleado extends Component{
                 <MDBIcon  icon="info"/>
                 </Button>
                 </div> 
-               return([rows.id_empleado,rows.numEmpleado,rows.nombre +" "+ rows.apellidos,rows.nombreArea,rows.departamento,rows.correo,rows.numExtension,botonEditar,botonInformacion])
+               return([rows.id_empleado,rows.numEmpleado,rows.nombre +" "+ rows.apellidos,rows.nombreArea,rows.puesto,rows.correo,rows.numExtension,botonEditar,botonInformacion])
               })
           
      
          let tablaInicio = 
-         <div>
-           <Card  style={{marginTop:"1%",width:"95%" }}>  
+         <div >
+          <center>
+          <Card  style={{marginTop:"1%",width:"95%" }}>  
            <MUIDataTable    
            title={"DIRECTORIO CEAV" }
            data={data1}
@@ -894,6 +894,8 @@ class tablaDataEmpleado extends Component{
            options={options}
            />
            </Card> 
+          </center>
+
            </div>
 
 

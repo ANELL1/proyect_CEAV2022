@@ -6,6 +6,7 @@ import swal from 'sweetalert';
 import MUIDataTable from "mui-datatables";
 import { EditOutlined,IssuesCloseOutlined } from '@ant-design/icons';
 import './sideNavAdmin.css'
+import pageNew from '../imagen/constructionPage.png'
 
 class catalogoExtensiones extends Component{
     constructor(props){
@@ -469,7 +470,7 @@ class catalogoExtensiones extends Component{
         
         return(
           <React.Fragment>   
-          <Menu mode="horizontal" className='menuSide' defaultSelectedKeys={['mail']}>
+          {/* <Menu mode="horizontal" className='menuSide' defaultSelectedKeys={['mail']}>
             <Menu.Item key="mail"  icon={<EditOutlined />} onClick={e=>this.tablainicio()}>
             REGISTRAR EXTENSIÓN
             </Menu.Item>
@@ -481,7 +482,8 @@ class catalogoExtensiones extends Component{
             {formulario2}
             {formulario3}
             {formulario4}
-            {tablaFormulario}
+            {tablaFormulario} */}
+            <center><img src={pageNew} style={{width:"52%"}}/></center>   
           </React.Fragment>
         )
     }

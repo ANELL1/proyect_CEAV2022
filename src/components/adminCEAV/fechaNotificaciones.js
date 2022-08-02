@@ -4,11 +4,11 @@ import axios from 'axios';
 import {API} from '../Graphql/Graphql'
 import {MDBIcon} from 'mdbreact'
 import MUIDataTable from "mui-datatables";
-import {MDBRow,MDBCol,MDBBtn,MDBModal,MDBContainer,MDBModalBody,MDBModalHeader,MDBModalFooter} from 'mdbreact'
-import { Row,Col,Input } from 'reactstrap'
-import { Select,Space,DatePicker, Form  } from 'antd';
+import { MDBBtn,MDBModal,MDBModalBody,MDBModalHeader,MDBModalFooter} from 'mdbreact'
+import { Row,Col } from 'reactstrap'
+import { DatePicker, Form  } from 'antd';
 import swal from 'sweetalert';
-import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
+// import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
 
 class FechaNotificaciones extends Component{
     constructor(props){
@@ -66,7 +66,6 @@ class FechaNotificaciones extends Component{
               `  }           
            })
          .then(response => { 
-            // console.log("response",response)
             this.setState({tablaFecha:response.data.data.getTablaFechaNotificaciones}) 
           })
           .catch(err=>{
@@ -76,7 +75,6 @@ class FechaNotificaciones extends Component{
       }
 
       editar(id){ 
-        console.log("esto es id",id)
         this.setState({ArrayNotiFechas:id})  
         this.setState({
           id_empleadoUpdate:id.id_empleado,
@@ -100,34 +98,27 @@ class FechaNotificaciones extends Component{
       } 
 
       handleChange1(e){
-        // console.log("e",e)
         if(e){
           let fecha1 = e._d.toString();
           this.setState({valor1:fecha1})
-          // console.log("e1",this.state.fechaAlta1)
         }
       }
       handleChange2(e){
-        // console.log("e",e)
         if(e){
           let fecha2 = e._d.toString()
           this.setState({valor2:fecha2})
-          console.log("e2",fecha2)
-          console.log("e2V",this.state.valor2)
         }
       }
       handleChange3(e){
         if(e){
           let fecha3 = e._d.toString();
           this.setState({valor3:fecha3})
-          console.log("e3",fecha3)
         }
       }
       handleChange4(e){
         if(e){
           let fecha4 = e._d.toString();
           this.setState({valor4:fecha4})
-          console.log("e4",fecha4)
         }
       }
 
@@ -157,7 +148,6 @@ class FechaNotificaciones extends Component{
           }
         })
           .then((response) => { 
-            // console.log("response",response)
            if(response.data.data.updatefechasNotificaciones.message === "actualizacion exitosa"){
               swal({              
               title:"actualizacion exitosa",                            
@@ -165,7 +155,6 @@ class FechaNotificaciones extends Component{
               button:false,
               timer: 1500
             });  
-            // this.setState({area:[],nomeclatura:[],numSerie:[]})     
             setTimeout(function(){
              window.location.reload()
               }, 1500);     
@@ -193,7 +182,7 @@ class FechaNotificaciones extends Component{
       };
     render(){
       const dateFormatList = ['DD/MM/YYYY', 'DD/MM/YY'];
-      const { Option } = Select;
+      // const { Option } = Select;
         let botonEditar;
         let tablaFormulario;
         let modal;
@@ -295,7 +284,6 @@ class FechaNotificaciones extends Component{
             if(rows.fechaNotificacionBaja === "") {
               dataFechaNotificacionBAja = "NO ASIGNADO"
             }else if (rows.fechaNotificacionBaja){
-              console.log("esto es rows.fechaNotificacionBaja",rows.fechaNotificacionBaja)
               let fechaNotBaja=rows.fechaNotificacionBaja       
               const fechaNotB = new Date(fechaNotBaja); 
               var letrasM4 = new Array ("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"); 
@@ -376,7 +364,6 @@ class FechaNotificaciones extends Component{
              if(this.state.fechaNotificacionBajaUpdate === "") {
                dataFechaNotificacionBAja = ""
              }else if (this.state.fechaNotificacionBajaUpdate){
-               // console.log("esto es rows.fechaNotificacionBaja",rows.fechaNotificacionBaja)
                let fechaNotBaja = this.state.fechaNotificacionBajaUpdate       
                const fechaNotB = new Date(fechaNotBaja); 
                var letrasM4 = new Array ("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"); 

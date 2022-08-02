@@ -313,7 +313,7 @@ onSubmitBtn2 = async (e)=>{
 
 
     render(){ 
-      const { Option } = Select; 
+      // const { Option } = Select; 
       let formulario;
       let formularioNiveles;
       let tablaFormulario;
